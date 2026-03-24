@@ -78,12 +78,15 @@ Este projeto demonstra a construção de um chatbot funcional capaz de gerar doc
 
 ###  Bot no Telegram
 
-![Bot](images/bot.png)
+Exemplo caso 1:
+<img width="637" height="753" alt="bot 1" src="https://github.com/user-attachments/assets/05605a83-f7f4-4d0b-af33-9e90b569762f" />
+<img width="576" height="449" alt="image" src="https://github.com/user-attachments/assets/91c4fff9-f47c-4110-81c3-e92e7ef5c784" />
 
-###  Documento gerado
+Exemplo caso 2:
+<img width="643" height="681" alt="bot 2" src="https://github.com/user-attachments/assets/79a86e95-7bb5-4b47-b7c8-be80a23f66a8" />
 
-![Documento](images/documento.png)
-
+Exemplo caso 3:
+<img width="649" height="754" alt="bot 3" src="https://github.com/user-attachments/assets/abab80ec-b60d-4e48-82a0-95bb8b5dee64" />
 ---
 
 ##  Estrutura do projeto
