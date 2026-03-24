@@ -1,0 +1,1042 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1248,
+        -16
+      ],
+      "id": "c805f453-10f5-49b4-9e09-77d2ffcd2624",
+      "name": "Telegram Trigger",
+      "webhookId": "773f6c36-636c-4125-9180-b41b0eafe46f",
+      "credentials": {
+        "telegramApi": {
+          "id": "mdhx8TrPUcHYDqPA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "5ef489f0-bc9c-4007-8c01-7dbc745c8799",
+              "leftValue": "={{$json[\"message\"][\"text\"]}}",
+              "rightValue": "1",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "00494578-a8df-4db3-a5f0-448c5814f0a7",
+              "leftValue": "={{$json[\"message\"][\"text\"]}}",
+              "rightValue": "2",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "d88d99dc-03d6-4b13-a8d3-630ab02b7e3e",
+              "leftValue": "={{$json[\"message\"][\"text\"]}}",
+              "rightValue": "=3",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1024,
+        -16
+      ],
+      "id": "1a60a367-ce39-40cd-be8c-dfbf2674f5b5",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "ccf1a699-7f63-4040-8419-fefd62facb8c",
+                    "leftValue": "={{$json[\"message\"][\"text\"]}}",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c2037368-3b14-44a0-9877-76f3939cad30",
+                    "leftValue": "={{$json[\"message\"][\"text\"]}}",
+                    "rightValue": "2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "a4eefdc7-3d62-459e-9a14-6e4c0f1e0aaf",
+                    "leftValue": "={{$json[\"message\"][\"text\"]}}",
+                    "rightValue": "3",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "none",
+          "ignoreCase": false,
+          "allMatchingOutputs": false
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -784,
+        80
+      ],
+      "id": "80ffde6a-5d85-4f6f-a873-5133a24791e1",
+      "name": "route commands"
+    },
+    {
+      "parameters": {
+        "chatId": "={{$json[\"message\"][\"chat\"][\"id\"]}}",
+        "text": "Escolha uma opção:  1 - Criar documento 📄 2 - Inserir imagem/texto 🖼️ 3 - Notícias G1 📰 ",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -880,
+        -256
+      ],
+      "id": "b15f277f-d163-49b6-8abf-c91088c465b3",
+      "name": "Enviar menu",
+      "webhookId": "327f6b59-eb0b-4d35-a0d3-cf535d3dc834",
+      "credentials": {
+        "telegramApi": {
+          "id": "mdhx8TrPUcHYDqPA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "=1DiCY0rqHCyYz672X53SBuMqHef8WxPh7EpG77e2tlAk",
+          "mode": "id"
+        },
+        "name": "=Documento {{$now}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -240,
+        -64
+      ],
+      "id": "c8b7de4f-ebd8-491c-b5e6-c85b1b481034",
+      "name": "Template - Documento original",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HJLf2SUFiQ5kojY0",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{$node[\"Template - Documento original\"].json[\"id\"]}}",
+        "simple": false,
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "<<texto>>",
+              "replaceText": "={{$node[\"caso 1\"][\"json\"][\"data\"][\"text\"]}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        -96,
+        -64
+      ],
+      "id": "efe3fcb6-01bb-4188-a00d-892135f53997",
+      "name": "Inserir texto",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "pwRxvHx63VMmNaWg",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{$node[\"Template - Documento original\"].json[\"id\"]}}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "application/pdf"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        48,
+        -64
+      ],
+      "id": "e796d369-8c83-4708-827d-48bd38fa2758",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HJLf2SUFiQ5kojY0",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "={{$node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"]}}",
+        "binaryData": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        176,
+        -64
+      ],
+      "id": "aefa7366-0381-42bd-adee-298ee2d80d54",
+      "name": "Enviar pdf",
+      "webhookId": "b0e6429a-6c2d-4368-adac-f9eaae15e9d7",
+      "credentials": {
+        "telegramApi": {
+          "id": "mdhx8TrPUcHYDqPA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{$node[\"Template - Documento original\"].json[\"id\"]}}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        320,
+        -64
+      ],
+      "id": "9cd3b5b8-03bb-4309-86c9-d2ed97effe34",
+      "name": "Share file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HJLf2SUFiQ5kojY0",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "chatId": "={{$json[\"message\"][\"chat\"][\"id\"]}}",
+        "message": "📄 Você escolheu criar um documento.  Clique no link abaixo e nele escreva o texto que deseja inserir.",
+        "responseType": "freeText",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -400,
+        -64
+      ],
+      "id": "40b28e22-7e7c-44e9-add3-137db3c593a8",
+      "name": "caso 1",
+      "webhookId": "4b70d7b2-ec03-470c-a4d2-8bc4ec210314",
+      "credentials": {
+        "telegramApi": {
+          "id": "mdhx8TrPUcHYDqPA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "chatId": "={{$json[\"message\"][\"chat\"][\"id\"]}}",
+        "message": "🖼️ Você escolheu Inserir imagem/texto . Clique no link abaixo para preencher os marcadores com o nome, descrição e arquivo da imagem.",
+        "responseType": "customForm",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Nome:"
+            },
+            {
+              "fieldLabel": "Descrição:"
+            },
+            {
+              "fieldLabel": "Arquivo( jpg ou png):",
+              "fieldType": "file"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -400,
+        96
+      ],
+      "id": "1aafd848-c03b-4831-9452-4e1aa00975bd",
+      "name": "caso 2",
+      "webhookId": "4b70d7b2-ec03-470c-a4d2-8bc4ec210314",
+      "credentials": {
+        "telegramApi": {
+          "id": "mdhx8TrPUcHYDqPA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "copy",
+        "fileId": {
+          "__rl": true,
+          "value": "=138w6GSPRCIB1yq4R2nWC0dRmgq2LowWU7guccNZnWaQ",
+          "mode": "id"
+        },
+        "name": "=Documento {{$now}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -112,
+        96
+      ],
+      "id": "9d3caadd-312f-4ff5-bdf2-e87f998419dd",
+      "name": "Template 2 - Documento original",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HJLf2SUFiQ5kojY0",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{$node[\"Template 2 - Documento original\"].json[\"id\"]}}",
+          "mode": "id"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "docsToFormat": "application/pdf"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        480,
+        96
+      ],
+      "id": "ae36fe87-b3f8-4116-a479-e28b2a0acc8e",
+      "name": "Download file2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HJLf2SUFiQ5kojY0",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendDocument",
+        "chatId": "={{$node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"]}}",
+        "binaryData": true,
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        624,
+        96
+      ],
+      "id": "af649049-e5b0-4a58-868d-eb932fb874ca",
+      "name": "Enviar pdf2",
+      "webhookId": "b0e6429a-6c2d-4368-adac-f9eaae15e9d7",
+      "credentials": {
+        "telegramApi": {
+          "id": "mdhx8TrPUcHYDqPA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{$node[\"Template 2 - Documento original\"].json[\"id\"]}}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        768,
+        96
+      ],
+      "id": "92bdcc7b-4b46-4470-a05e-dea8592c0a1d",
+      "name": "Share file2",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HJLf2SUFiQ5kojY0",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{$node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"]}}",
+        "text": "=Seu documento: https://docs.google.com/document/d/{{$node[\"Template - Documento original\"].json[\"id\"]}}/edit",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        464,
+        -64
+      ],
+      "id": "d60d4e6f-5e97-4bf7-801d-a6fc58c5c416",
+      "name": "Link",
+      "webhookId": "ebad0b5d-ff09-4d37-8c4b-292703d98302",
+      "credentials": {
+        "telegramApi": {
+          "id": "mdhx8TrPUcHYDqPA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{$node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"]}}",
+        "text": "=Seu documento: https://docs.google.com/document/d/{{$node[\"Template 2 - Documento original\"].json[\"id\"]}}/edit",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        912,
+        96
+      ],
+      "id": "54dc58ad-4a27-4573-b5ae-7b353404d90f",
+      "name": "Link2",
+      "webhookId": "ebad0b5d-ff09-4d37-8c4b-292703d98302",
+      "credentials": {
+        "telegramApi": {
+          "id": "mdhx8TrPUcHYDqPA",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{$node[\"Template 2 - Documento original\"].json[\"id\"]}}",
+        "simple": false,
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "replaceAll",
+              "text": "<<titulo>>",
+              "replaceText": "={{$node[\"caso 2\"][\"json\"][\"data\"][\"Nome:\"]}}"
+            },
+            {
+              "action": "replaceAll",
+              "text": "<<descricao>>",
+              "replaceText": "={{$node[\"caso 2\"][\"json\"][\"data\"][\"Descrição:\"]}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        336,
+        96
+      ],
+      "id": "12c8786d-e5dc-4e21-9b7e-0e5a1fb5f6a4",
+      "name": "Inserir texto2",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "pwRxvHx63VMmNaWg",
+          "name": "Google Docs account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "Arquivo__jpg_ou_png__",
+        "name": "={{$now}}_arquivo",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "root",
+          "cachedResultName": "/ (Root folder)"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -256,
+        96
+      ],
+      "id": "461a5f2b-697a-4c6f-94ca-e1263bd25940",
+      "name": "Upload file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HJLf2SUFiQ5kojY0",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "share",
+        "fileId": {
+          "__rl": true,
+          "value": "={{$node[\"Upload file\"].json[\"id\"]}}",
+          "mode": "id"
+        },
+        "permissionsUi": {
+          "permissionsValues": {
+            "role": "reader",
+            "type": "anyone"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        48,
+        96
+      ],
+      "id": "79a2f778-a818-4982-9e14-71e613086796",
+      "name": "Share file1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "HJLf2SUFiQ5kojY0",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://docs.googleapis.com/v1/documents/{{$node[\"Template 2 - Documento original\"].json[\"id\"]}}:batchUpdate",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googleDriveOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"requests\": [\n    {\n      \"insertInlineImage\": {\n        \"location\": {\n          \"index\": 1\n        },\n        \"uri\": \"{{'https://drive.google.com/uc?export=download&id=' + $node['Upload file'].json['id']}}\",\n        \"objectSize\": {\n          \"height\": {\n            \"magnitude\": 200,\n            \"unit\": \"PT\"\n          },\n          \"width\": {\n            \"magnitude\": 200,\n            \"unit\": \"PT\"\n          }\n        }\n      }\n    }\n  ]\n}",
+        "options": {
+          "allowUnauthorizedCerts": false
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        192,
+        96
+      ],
+      "id": "48287304-dd3a-4bf1-b8a1-95723dbb6084",
+      "name": "HTTP Request",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "CVJkHxFHiaoPxzKv",
+          "name": "Unnamed credential"
+        },
+        "googleDriveOAuth2Api": {
+          "id": "MzhTOVAquVtxwCv4",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://g1.globo.com/rss/g1/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -400,
+        288
+      ],
+      "id": "814a1932-8f83-45ff-82a5-4f36f700e621",
+      "name": "G1"
+    },
+    {
+      "parameters": {
+        "url": "https://g1.globo.com/rss/g1/",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        -240,
+        288
+      ],
+      "id": "2226a5f6-4749-442b-8c0f-af80f6de48e8",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "maxItems": 6
+      },
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        288
+      ],
+      "id": "9f19cfd4-103c-4c70-bb9c-957909bbf8e2",
+      "name": "Limit"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nlet text = \"📰 Notícias do G1:\\n\\n\";\n\nitems.forEach((item, index) => {\n  const titulo = item.json.title || \"Sem título\";\n  const link = item.json.link || \"\";\n  text += `${index + 1}. ${titulo}\\n${link}\\n\\n`;\n});\n\nreturn [\n  {\n    json: {\n      mensagem: text\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        96,
+        288
+      ],
+      "id": "f90767e4-1aec-474b-915f-307765705121",
+      "name": "formato"
+    },
+    {
+      "parameters": {
+        "chatId": "={{$node[\"Telegram Trigger\"].json[\"message\"][\"chat\"][\"id\"]}}",
+        "text": "={{$json[\"mensagem\"]}}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        256,
+        288
+      ],
+      "id": "9ad5e789-e856-408d-ab08-fb08254e579d",
+      "name": "Send a text message",
+      "webhookId": "98af56cc-8c81-4331-a523-210b40ba21c1",
+      "credentials": {
+        "telegramApi": {
+          "id": "mdhx8TrPUcHYDqPA",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Enviar menu",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "route commands",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "route commands": {
+      "main": [
+        [
+          {
+            "node": "caso 1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "caso 2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "G1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar menu": {
+      "main": [
+        []
+      ]
+    },
+    "Template - Documento original": {
+      "main": [
+        [
+          {
+            "node": "Inserir texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Inserir texto": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Enviar pdf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar pdf": {
+      "main": [
+        [
+          {
+            "node": "Share file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file": {
+      "main": [
+        [
+          {
+            "node": "Link",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "caso 1": {
+      "main": [
+        [
+          {
+            "node": "Template - Documento original",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "caso 2": {
+      "main": [
+        [
+          {
+            "node": "Upload file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Template 2 - Documento original": {
+      "main": [
+        [
+          {
+            "node": "Share file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file2": {
+      "main": [
+        [
+          {
+            "node": "Enviar pdf2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enviar pdf2": {
+      "main": [
+        [
+          {
+            "node": "Share file2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file2": {
+      "main": [
+        [
+          {
+            "node": "Link2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Inserir texto2": {
+      "main": [
+        [
+          {
+            "node": "Download file2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Link2": {
+      "main": [
+        []
+      ]
+    },
+    "Upload file": {
+      "main": [
+        [
+          {
+            "node": "Template 2 - Documento original",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Share file1": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Inserir texto2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "G1": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "formato",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "formato": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b9d862c8-ae23-4bae-a1a5-47dc24b95f50",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4880e07015a5b80287efcbfe2f670cc1bf2dba14011f41b52a4d38bab76a7c96"
+  },
+  "id": "Dpav15BplNqyLmI2",
+  "tags": []
+}
