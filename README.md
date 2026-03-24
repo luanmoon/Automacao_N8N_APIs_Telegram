@@ -67,19 +67,19 @@ Este projeto demonstra a construção de um chatbot funcional capaz de gerar doc
 
 ---
 
-## 📸 Demonstração
+##  Demonstração
 
 
 
-### 🔧 Workflow no n8n
+###  Workflow no n8n
 
-![Workflow](images/fluxo.png)
+![Workflow](imagens,N8N_automacao_telegram/workflow)
 
-### 💬 Bot no Telegram
+###  Bot no Telegram
 
 ![Bot](images/bot.png)
 
-### 📄 Documento gerado
+###  Documento gerado
 
 ![Documento](images/documento.png)
 
@@ -100,7 +100,7 @@ telegram-n8n-automation/
 
 ---
 
-## ⚡ Como usar
+##  Como usar
 
 1. Clone o repositório:
 
