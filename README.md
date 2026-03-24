@@ -1,5 +1,5 @@
 # Automacao_N8N_APIs_Telegram
-A#  Telegram Automation Bot com n8n
+#  Telegram Automation Bot com n8n
 
 Automação de processos via Telegram utilizando **n8n** com integração a APIs externas como **Google Drive**, **Google Docs** e consumo de **feeds RSS**.
 
